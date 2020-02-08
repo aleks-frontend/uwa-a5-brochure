@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css');
+      @import url('https://use.typekit.net/fxc6mtk.css');
+
+      /* 
+      input order
+
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{placeholder-image-2}}
+      {{placeholder-image-3}}
+      {{placeholder-image-4}}
+      {{placeholder-image-5}}
+      {{placeholder-image-6}}
+      {{placeholder-image-7}}
+      {{placeholder-toggle-new}}
+      {{placeholder-validation}}
+      {{{UWA_theme-a4bop}}}
+      {{{UWA_faculty-a4bop}}}
+      {{{UWA_feature-image-a4bop}}}
+      {{{UWA_heading-first-line--a4bop}}}
+      {{{UWA_heading-first-line-size--a4bop}}}
+      {{UWA_heading-first-line-font-weight--a4bop}}
+      {{{UWA_heading-second-line--a4bop}}}
+      {{{UWA_heading-second-line-size--a4bop}}}
+      {{UWA_heading-second-line-font-weight--a4bop}}
+
+      */
+
+      :root {
+        --blue: {{{account.colors.uwa-blue}}};
+        --white: {{{account.colors.white}}};
+        --black: {{{account.colors.black}}};
+        --yellow: {{{account.colors.yellow}}};
+
+        --font-family-content: 'TT Norms Pro';
+        --font-family-heading: 'novel-pro';
+
+        --logo: url({{{account.logos.formal-primary}}});
+      }
+
+      html {
+        font-family: var(--font-family-content);
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }     
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fit--coverPage {
+        padding: 0rem 1.39rem 1.27rem;
+      }
+
+      .fit--internalPage { 
+        padding: 1.4rem 1.4rem 0.7rem;
+      }
+
+      .header {
+        position: relative;
+        flex: 1;
+      }
+
+      .hero__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .hero {
+        position: absolute;
+        top: 1.38rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        background: var(--blue);
+      }
+
+      .hero__texture {
+        position: absolute;
+        top: 1.38rem;
+        right: -0.3rem;
+        bottom: 0;
+        left: -0.3rem;
+        background: var(--blue);
+        clip-path: polygon(0% 2.38rem, 0.3rem 2.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+        -webkit-clip-path: polygon(0% 2.38rem, 0.3rem 2.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+      }
+
+      .faculty__container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0.91rem;
+        padding: 0.6rem 0.2rem 0.2rem 0.2rem;
+        width: 4.5rem;
+        height: 1.72rem;
+        text-align: center;
+        background-color: var(--blue);
+      }
+
+      .faculty {
+        font-size: 0.308rem;
+        line-height: 1.1em;
+        color: var(--white);
+      } 
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .theme--clipImageSmall .body {
+        min-height: 3rem;
+        max-height: 12.4rem;
+      }
+
+      .theme--clipImageLarge .body {
+        min-height: 3rem;
+        max-height: 9.4rem;
+      }
+
+      .fit--internalPage .body--internalPage { 
+        min-height: auto;
+        max-height: none;
+        flex: 1;
+        padding: 0;
+      }
+
+      .column__container {
+        display: flex;
+        height: 100%;
+        font-size: 1rem;
+      }
+
+      .column {
+        margin-right: 0.55rem;
+        flex: 1;
+        font-size: {{{UWA_copy-font-size--a4bop}}}{{^UWA_copy-font-size--a4bop}}100{{/UWA_copy-font-size--a4bop}}%;
+      }
+
+      .column:last-child {
+        margin-right: 0;
+      }
+
+
+      .content--top {
+        position: relative;
+        flex: 1;
+        padding: 0.9rem 0rem 1.01rem 0rem;
+      }
+
+      .column h3,
+      .grid__item h3 {
+        position: relative;
+        margin-top: 1.23em;
+        font-size: 0.448em;
+        line-height: 1.25em;
+        font-weight: bold;
+      }
+
+
+      .column h3 + .column h3,
+      .grid__item h3 + .grid__item h3 {
+        margin-top: 0;
+      }
+
+      .column h3:first-child:before {
+        content: '';
+        position: absolute;
+        top: -0.5em;
+        width: 66.6%;
+        height: 0.14em;
+        background: var(--black);
+      }
+
+      .column h4,
+      .grid__item h4 {
+        margin-top: 1em;
+        font-size: 0.36em;
+        line-height: 1.4em;
+        font-weight: 700;
+        font-family: var(--font-family-heading);
+      }
+
+      .column h4 + .column h4,
+      .grid__item h4 + .grid__item h4 {
+        margin-bottom: 0;
+      }
+
+
+      .column p,
+      .grid__item p {
+        font-size: 0.287em;
+        line-height: 1.5em;
+        font-weight: normal;
+      }
+
+      .column p {
+        margin-top: 0.28em;
+      }
+
+      .column ul + p,
+      .column ol + p,
+      .grid__item ul + p,
+      .grid__item ol + p {
+        margin-top: 1.5em;
+      }
+
+      .column p + p {
+        margin-top: 0.35em;
+      }
+
+      .grid__item p + p {
+        margin-top: 1.55em;
+      }
+
+      .column ul,
+      .grid__item ul {
+        position: relative;
+        margin-top: 0.49em;
+        margin-left: 0.36em;
+        list-style-type: disc;
+      }
+
+      .column ol,
+      .grid__item ol {
+        margin-top: 0.49em;
+        margin-left: 0.25em;
+      }
+
+      .column li,
+      .grid__item li {
+        font-size: 0.288em;
+        line-height: 1.5em;
+        font-weight: 500;
+      }
+
+      .grid__item p:first-child {
+        margin-top: 0.4em;
+      }
+
+      .column h3:first-child,
+      .column h4:first-child,
+      .column p:first-child,
+      .column ul:first-child,
+      .column ol:first-child,
+      .grid__item h3:first-child,
+      .grid__item h4:first-child,
+      .grid__item ul:first-child,
+      .grid__item ol:first-child {
+        margin-top: 0;
+      }
+
+      .heading__container {
+        position: absolute;
+        top: 0.2rem;
+        left: 0.82rem;
+        width: 100%;
+        font-size: 0.778rem;
+        transform: translateY(-100%);
+      }
+
+      .heading__container h1,
+      .heading__container h2 {
+        font-size: 1em;
+      }
+
+      .heading__container h1 { font-family: var(--font-family-heading); }   
+
+      .headingFontWeight--regular h1,
+      .headingFontWeight--regular h2 {
+        font-weight: 400;
+      }
+
+      .headingFontWeight--medium h1,
+      .headingFontWeight--medium h2 {
+        font-weight: 500;
+      }
+
+      .headingFontWeight--bold h1,
+      .headingFontWeight--bold h2 {
+        font-weight: 700;
+      }
+
+      .heading {
+        max-height: 1.526rem;
+      }
+
+      .heading--primary {
+        line-height: 1em;
+      }
+
+      .heading--secondary {
+        margin-left: 0.87rem;
+        font-size: 1em;
+        line-height: 0.9em;
+      }
+
+      .heading--primary + .heading--secondary { margin-top: 0.1rem; }
+
+      .heading__inner { 
+        display: inline-block;
+        line-height: 1.1em;
+        background: var(--white);
+      }
+
+      .heading--primary .heading__inner { padding: 0.25rem 1.8rem 0.3rem 0.25rem; }
+      .heading--secondary .heading__inner { padding: 0.4rem 1.2rem 0rem 0.25rem; }
+
+      .content--bottom {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .info {
+        width: 6.8rem;
+        padding-top: 0.4rem;
+      }
+
+      .info__facultyName {
+        margin-bottom: 0.1rem;
+        font-size: 0.262rem;
+      }
+
+      .info__facultyName h4 {  
+        position: relative;
+        display: inline-block;
+        font-size: 1em;
+        font-weight: bold;      
+      }
+
+      .info__facultyName h4:before {
+        content:'';
+        position: absolute;
+        top: -0.25rem;
+        width: 100%;
+        height: 0.03rem;
+        background: var(--black);
+      }
+
+      .info__address {
+        margin-bottom: 0.11rem;
+        max-height: 0.7rem;
+        font-weight: normal;
+      }
+
+      .info__address p { font-size: 0.2582rem; }
+
+      .info__phone {
+        margin-bottom: 0.12rem;
+        font-size: 0.262rem;
+        line-height: 1.2em;
+      }
+
+      .info__contact {
+        font-size: 0.26rem;
+        font-weight: normal;
+      }
+
+      .info__contactDivider { 
+        display: none;
+        margin-left: 0.05rem;
+      }
+
+      .info__contact--bothExist .info__contactDivider { display: inline-block; }
+
+      .info__website {
+        max-height: 0.95rem;
+        font-size: 0.263rem;
+        line-height: 1.2em;
+        font-weight: bold;
+        color: var(--blue);
+      }
+
+      .logo__container {
+        height: 1.5rem;
+        align-self: flex-end;
+        font-size: 0;
+      }
+
+      .logo {
+        width: 4.47rem;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+      }
+
+      .footer--lastPage {
+        margin-bottom: 22pt;
+      }
+
+      .footer--internalPage.footerImageToggle--show {
+        height: 0.9rem;
+      }
+
+      .fit--even .footer--internalPage.footerImageToggle--hide {
+        justify-content: flex-end;
+        text-align: right;
+      }
+
+      .fit--odd .footer--internalPage.footerImageToggle--hide {
+        justify-content: flex-start;
+      } 
+
+      .footer__text {
+        display: none;
+        width: 5.4rem;
+        padding-top: 0.2rem;
+        font-size: 0.26rem;
+        font-weight: 700;
+        line-height: 1.2em;
+        border-top: 0.02rem solid var(--yellow);
+      }
+
+      .pageNumber {
+        font-weight: normal;
+      }
+
+      .fit--odd .footer__text--primary,
+      .fit--even .footer__text--secondary {
+        display: block;
+      }
+
+      .fit--internalPage .footerImageToggle--show .footer__text--primary,
+      .fit--internalPage .footerImageToggle--show .footer__text--secondary {
+        display: none;
+      }
+
+      .footer__text--primary .pageNumber {
+        margin-right: 0.12rem;      
+      }
+
+      .footer__text--secondary .pageNumber {
+        margin-left: 0.12rem;      
+      }
+
+      .footer__image {
+        display: none;
+        position: absolute;
+        height: 1.2rem;
+        bottom: -0.42rem;
+        background-color: var(--blue);
+      }
+
+      .footerImageToggle--show .footer__image {
+        display: block;
+      }
+
+      .footerImagePosition--fullWidth .footer__image {
+        width: 123%;;
+      }
+
+      .footerImagePosition--left .footer__image,
+      .footerImagePosition--right .footer__image {
+        width: 12.5rem;
+      }
+
+      .footerImagePosition--left .footer__image,
+      .footerImagePosition--fullWidth .footer__image {
+        left: -1.3rem;
+      }
+
+      .footerImagePosition--right .footer__image {
+        right: -1.3rem;
+      }
+
+      .cricos__container {
+        position: absolute;
+        left: 0rem;
+        bottom: -0.45rem;      
+        display: flex;
+      }
+
+      .footer--lastPage .cricos__container {
+        bottom: -0.61rem;   
+      }
+
+      .cricos {
+        margin-right: 0.63rem;
+      }
+
+      .cricos,
+      .exportId {
+        position: relative;
+        font-size: 0.2rem;
+        line-height: 1.2em;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-rows: 5.3rem 1fr 5.3rem;
+        grid-auto-flow: dense;
+        margin-bottom: 0.1rem;
+        flex: 1;
+        grid-gap: 0.55rem;
+      }
+
+      .grid--col-2 { grid-template-columns: 1fr 1fr; }
+      .grid--col-1 { grid-template-columns: 1fr; }
+
+      .grid__item { 
+        position: relative;
+        grid-row: span 3;
+      }
+
+      .grid__item--image {
+        grid-row: 1;
+        grid-column: 1;
+      }
+
+      .grid--imageSize-2 .grid__item--image { grid-column: 1 / span -1; }
+
+      .grid--imageSize-2.grid--col-2 .grid__item--image,
+      .grid.grid--col-1 .grid__item--image { grid-column: 1 / -1 !important; }
+
+      .grid--imageSize-2.grid--col-2 .grid__item:not(.grid__item--image) { grid-row: span 2; }
+
+      .grid--imageSize-1.grid--imagePos-topRight .grid__item--image {
+        grid-column: span 1 / -1;
+      }
+
+      .grid--imageSize-2.grid--imagePos-topRight .grid__item--image {
+        grid-column: span 2 / -1;
+      }
+
+      .grid--imagePos-bottomRight .grid__item--image, 
+      .grid--imagePos-bottomLeft .grid__item--image {
+        grid-row: span 1 / -1;
+      }
+
+      /* Covers top right and bottom right + col 2 + col 1 */
+      .grid--imagePos-topRight.grid--col-1 .grid__item:nth-child(2),
+      .grid--imagePos-topRight.grid--imageSize-2 .grid__item:nth-child(3),
+      .grid--imagePos-bottomRight.grid--col-1 .grid__item:nth-child(2),
+      .grid--imagePos-bottomRight.grid--imageSize-2 .grid__item:nth-child(3) {
+        grid-row: span 2; 
+      }
+
+      /* Covers top left and bottom left + col 2 + col 1 */
+      .grid--imagePos-topLeft .grid__item:nth-child(2),
+      .grid--imagePos-topLeft.grid--imageSize-2 .grid__item:nth-child(3),
+      .grid--imagePos-bottomLeft .grid__item:nth-child(2),
+      .grid--imagePos-bottomLeft.grid--imageSize-2 .grid__item:nth-child(3) {
+        grid-row: span 2; 
+      }
+
+      .grid--imagePos-topRight.grid--col-2 .grid__item:nth-child(3),
+      .grid--imagePos-bottomRight.grid--col-2 .grid__item:nth-child(3) { grid-row: span 2; }
+
+      .grid--imageSize-1.grid--imagePos-bottomRight .grid__item--image {
+        grid-column: span 1 / -1;
+      }
+
+      .grid--imageSize-1.grid--imagePos-bottomLeft .grid__item--image {
+        grid-column: 1;
+      }
+
+      .grid--imageSize-2.grid--imagePos-bottomRight .grid__item--image {
+        grid-column: span 2 / -1;
+      }
+
+      .grid--imageSize-2.grid--imagePos-bottomLeft .grid__item--image {
+        grid-column: 1;
+      }
+
+      .grid__item:nth-child(2) { grid-column: 1; }
+      .grid__item:nth-child(3) { grid-column: 2; }
+
+      .image {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .grid__item .image {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0.3rem;
+      }
+
+      .grid__item .image:last-child {
+        margin-bottom: 0rem;
+      }
+
+      .featureImage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: var(--blue);
+      }
+
+      .grid--imagePos-topRight .featureImage,
+      .grid--imagePos-topLeft .featureImage {
+        top: 0rem;
+      }
+
+      .grid--imagePos-bottomRight .featureImage,
+      .grid--imagePos-topRight .featureImage {
+        right: -1.15rem;
+        left: 0.3rem;
+      }
+
+      .grid--imagePos-bottomLeft .featureImage,
+      .grid--imagePos-topLeft .featureImage {
+        left: -1.15rem;
+        right: 0.3rem;
+      }
+
+      .featureImage:before {
+        content: '';
+        position: absolute;
+        height: 2.37rem;
+        width: 0.35rem;
+        background: var(--blue);
+      }
+
+      .grid--imagePos-topLeft .featureImage:before {
+        left: 100%;
+        top: 0;
+      }
+
+      .grid--imagePos-bottomLeft .featureImage:before {
+        left: 100%;
+        bottom: 0;
+      }
+
+      .grid--imagePos-topRight .featureImage:before {
+        right: 100%;
+        top: 0;
+      }
+
+      .grid--imagePos-bottomRight .featureImage:before {
+        right: 100%;
+        bottom: 0;
+      }
+
+
+      /* Helper classes */
+      .u-hide { display: none; }
+      .u-padding-0 { padding: 0; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="theme--{{{UWA_theme-a4bop}}}{{^UWA_theme-a4bop}}clipImageSmall{{/UWA_theme-a4bop}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-4 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-5 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-6 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-7 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="containerMaster u-hide">
+      <div class="footer footer--lastPage">
+        <div class="content content--bottom">
+          <div class="info">
+            {{#UWA_identifier-name-a4bop}}
+            <div class="info__facultyName u-heading-patch" data-max-line="1">{{{UWA_identifier-name-a4bop}}}</div> <!--info__facultyName-->
+            {{/UWA_identifier-name-a4bop}}
+            {{#UWA_address--a4bop}}
+            <div class="info__address" data-max-height="css">{{{UWA_address--a4bop}}}</div><!-- info__address -->
+            {{/UWA_address--a4bop}}
+            {{#UWA_phone-number--a4bop}}
+            <div class="info__phone" data-char-limit="21">{{{UWA_phone-number--a4bop}}}</div><!-- info__address -->
+            {{/UWA_phone-number--a4bop}}
+            <div class="info__contact 
+                        {{#UWA_website--a4bop}}info__contact--{{/UWA_website--a4bop}}{{#UWA_email--a4bop}}bothExist{{/UWA_email--a4bop}}
+                        {{^UWA_website--a4bop}}u-{{/UWA_website--a4bop}}{{^UWA_website--a4bop}}hide{{/UWA_website--a4bop}} " data-max-line="1">
+              <span>{{{UWA_email--a4bop}}}</span>
+              <span class="info__contactDivider">|</span>
+              <span class="info__website">{{{UWA_website--a4bop}}}</span>
+            </div><!-- info__contact -->
+          </div> <!--info-->
+          <div class="logo__container">
+            <img class="logo" src="{{{account.logos.formal-primary}}}"><!--logo-->
+          </div> <!--logo__container-->
+        </div> <!--content--bottom-->
+        <div class="cricos__container" data-max-height="10">
+          <div class="cricos">{{{UWA_cricos--a4bop}}}</div><!--cricos-->
+          <div class="exportId {{^UWA_cricos--a4bop}}no-cricos{{/UWA_cricos--a4bop}}">{{{UWA_export-id--a4bop}}}</div><!--exportId-->
+        </div><!--cricos__container-->
+      </div><!--footer-->
+    </div><!-- containerMaster -->
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--coverPage">
+          <div class="header">
+            <div class="hero__container">
+              <div class="hero__texture"></div> <!--hero__texture-->
+              <div class="hero"><div class="reposition-fix">{{{UWA_feature-image-a4bop}}}</div></div> <!--hero-->
+            </div> <!--hero__container-->
+            {{#UWA_faculty-a4bop}}
+            <div class="faculty__container">
+              <div class="faculty" data-max-line="3">{{{UWA_faculty-a4bop}}}</div> <!--faculty-->
+            </div> <!--faculty__container-->
+            {{/UWA_faculty-a4bop}}
+          </div> <!--header-->
+          <div class="body" data-max-height="css">
+            <div class="content content--top {{^UWA_column-one--a4bop}}u-{{/UWA_column-one--a4bop}}{{^UWA_column-two--a4bop}}padding-0{{/UWA_column-two--a4bop}}">
+              <div class="heading__container">
+                {{#UWA_heading-first-line--a4bop}}
+                <div class="heading heading--primary u-heading-patch headingFontWeight--{{UWA_heading-first-line-font-weight--a4bop}}{{^UWA_heading-first-line-font-weight--a4bop}}regular{{/UWA_heading-first-line-font-weight--a4bop}}" data-max-height="css">
+                  <div class="heading__inner" style="font-size: {{{UWA_heading-first-line-size--a4bop}}}{{^UWA_heading-first-line-size--a4bop}}100{{/UWA_heading-first-line-size--a4bop}}%;">{{{UWA_heading-first-line--a4bop}}}</div><!-- heading__inner -->
+                </div><!-- heading--primary -->
+                {{/UWA_heading-first-line--a4bop}}
+                {{#UWA_heading-second-line--a4bop}}
+                <div class="heading heading--secondary u-heading-patch headingFontWeight--{{UWA_heading-second-line-font-weight--a4bop}}{{^UWA_heading-second-line-font-weight--a4bop}}regular{{/UWA_heading-second-line-font-weight--a4bop}}" data-max-height="css">
+                  <div class="heading__inner" style="font-size: {{{UWA_heading-second-line-size--a4bop}}}{{^UWA_heading-second-line-size--a4bop}}100{{/UWA_heading-second-line-size--a4bop}}%;">{{{UWA_heading-second-line--a4bop}}}</div>
+                </div><!-- heading--secondary -->
+                {{/UWA_heading-second-line--a4bop}}
+              </div><!-- heading__container -->
+              <div class="column__container">
+                <div class="column u-heading-patch">{{{UWA_column-one--a4bop}}}</div> <!--column-->
+                <div class="column u-heading-patch">{{{UWA_column-two--a4bop}}}</div> <!--column-->
+              </div> <!--column__container -->
+            </div> <!--content--top-->
+            <div class="content content--bottom">
+              <div class="info">
+                {{#UWA_identifier-name-a4bop}}
+                <div class="info__facultyName u-heading-patch" data-max-line="1">{{{UWA_identifier-name-a4bop}}}</div> <!--info__facultyName-->
+                {{/UWA_identifier-name-a4bop}}
+                {{#UWA_address--a4bop}}
+                <div class="info__address" data-max-height="css">{{{UWA_address--a4bop}}}</div><!-- info__address -->
+                {{/UWA_address--a4bop}}
+                {{#UWA_phone-number--a4bop}}
+                <div class="info__phone" data-char-limit="21">{{{UWA_phone-number--a4bop}}}</div><!-- info__address -->
+                {{/UWA_phone-number--a4bop}}
+                <div class="info__contact 
+                            {{#UWA_website--a4bop}}info__contact--{{/UWA_website--a4bop}}{{#UWA_email--a4bop}}bothExist{{/UWA_email--a4bop}}
+                            {{^UWA_website--a4bop}}u-{{/UWA_website--a4bop}}{{^UWA_website--a4bop}}hide{{/UWA_website--a4bop}} " data-max-line="1">
+                  <span>{{{UWA_email--a4bop}}}</span>
+                  <span class="info__contactDivider">|</span>
+                  <span class="info__website">{{{UWA_website--a4bop}}}</span>
+                </div><!-- info__contact -->
+              </div> <!--info-->
+              <div class="logo__container">
+                <img class="logo" src="{{{account.logos.formal-primary}}}"><!--logo-->
+              </div> <!--logo__container-->
+            </div> <!--content--bottom-->
+            <div class="cricos__container" data-max-height="10">
+              <div class="cricos">{{{UWA_cricos--a4bop}}}</div><!--cricos-->
+              <div class="exportId {{^UWA_cricos--a4bop}}no-cricos{{/UWA_cricos--a4bop}}">{{{UWA_export-id--a4bop}}}</div><!--exportId-->
+            </div><!--cricos__container-->
+          </div> <!--body-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    {{#collection.UWA_internal-pages--a4bop}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--internalPage">
+          <div class="body body--internalPage">
+            <div class="grid 
+                        {{^UWA_internal-pages-feature-image--a4bop}}grid--noHero{{/UWA_internal-pages-feature-image--a4bop}}
+                        grid--imageSize-{{^UWA_feature-image-size--a4bop}}1{{/UWA_feature-image-size--a4bop}}{{UWA_feature-image-size--a4bop}}
+                        grid--imagePos-{{^UWA_feature-image-position--a4bop}}topLeft{{/UWA_feature-image-position--a4bop}}{{UWA_feature-image-position--a4bop}}
+                        "  data-max-height="730"> 
+              <div class="grid__item grid__item--image">  
+                <div class="featureImage__container">
+                  <div class="featureImage__texture"></div><!-- featureImage__texture -->
+                  <div class="featureImage">
+                    <div class="reposition-fix">{{{UWA_internal-pages-feature-image--a4bop}}}</div><!-- reposition-fix -->
+                  </div><!-- featureImage -->
+                </div><!-- featureImage__container -->
+              </div><!-- grid__item--image -->
+              {{#collection.column}}
+              {{#block.column-block}}
+              <div class="grid__item grid__item--text">
+                <div class="grid__itemInner" data-max-height="dynamic">
+                  {{#collection.column-items}}
+                  {{#block.text-block}}
+                  <div class="copy u-heading-patch">{{{text--a4bop}}}</div><!-- copy -->
+                  {{/block.text-block}}
+                  {{#block.image}}
+                  <div class="image" style="height: calc({{^image-size--a4bop}}25{{/image-size--a4bop}}{{image-size--a4bop}} * 0.168rem);">
+                    <div class="reposition-fix">{{{image-a4bop}}}</div><!-- reposition-fix -->
+                  </div><!-- image -->
+                  {{/block.image}}
+                  {{/collection.column-items}}
+                </div><!-- grid__itemInner -->
+              </div><!-- grid__item -->
+              {{/block.column-block}}
+              {{/collection.column}}
+            </div> <!-- grid -->
+          </div> <!--body-->
+          <div class="footer footer--internalPage footerImageToggle--{{{UWA_footer-image-toggle-a4bop}}}{{^UWA_footer-image-toggle-a4bop}}hide{{/UWA_footer-image-toggle-a4bop}} footerImagePosition--{{{UWA_footer-image-position-a4bop}}}{{^UWA_footer-image-position-a4bop}}right{{/UWA_footer-image-position-a4bop}}">
+            <div class="footer__text footer__text--primary"><span class="pageNumber"></span>The University of Western Australia</div> <!--footer__text-->
+            <div class="footer__text footer__text--secondary">uwa.edu.au<span class="pageNumber"></span></div> <!--footer__text-->
+            <div class="footer__image"><div class="reposition-fix">{{{UWA_footer-image-a4bop}}}</div></div> <!--footer__text-->
+          </div> <!--footer-->
+        </div><!-- container fit-->
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/collection.UWA_internal-pages--a4bop}}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      {{{account.snippets.safariPopup}}}
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function gridControll() {
+        const grid = document.querySelectorAll('.grid');
+        if(!grid) return;
+
+        grid.forEach(gridItem => {
+          const gridItemChildren = (gridItem.querySelectorAll('.grid__item--text')).length;
+          gridItem.classList.add(`grid--col-${gridItemChildren}`);
+        })
+      }
+
+      gridControll();
+
+      function injectPrimaryFooter() {
+        const containers = document.querySelectorAll('.fit--internalPage');
+        if(!containers) return;
+        let counter = 1;
+        containers.forEach(container => {
+          const evenPageNumber = container.querySelector('.footer__text--secondary .pageNumber');
+          const oddPageNumber = container.querySelector('.footer__text--primary .pageNumber');
+          counter++
+          if(counter % 2 === 0) {
+            container.classList.add('fit--even');
+            evenPageNumber.innerText = counter;
+          } else {
+            container.classList.add('fit--odd');
+            oddPageNumber.innerText = counter;
+          }
+        })
+      }
+
+      injectPrimaryFooter(); 
+
+      function injectFooter() {
+        const footer = document.querySelector('.containerMaster .footer');
+        const containers = document.querySelectorAll('.fit--internalPage');
+        const lastContainer = containers[containers.length - 1];
+        const internalFooter = lastContainer.querySelector('.footer--internalPage');
+
+        if(!footer || !containers || !internalFooter) return;
+
+        internalFooter.classList.add('u-hide');
+        lastContainer.appendChild(footer);          
+      }
+
+      injectFooter();
+
+
+    </script>
+
+
+  </body>
+</html>
