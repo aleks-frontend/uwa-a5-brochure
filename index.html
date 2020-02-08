@@ -530,9 +530,13 @@
         grid-template-rows: 5.3rem 1fr 5.3rem;
         grid-auto-flow: dense;
         margin-bottom: 0.1rem;
-        flex: 1;
+        height: 705px;
         grid-gap: 0.55rem;
       }
+      
+      .grid.footerImageToggle--show { height: 689px; }
+      
+      .fit--lastPage .grid { height: 615px; }
 
       .grid--col-2 { grid-template-columns: 1fr 1fr; }
       .grid--col-1 { grid-template-columns: 1fr; }
@@ -540,7 +544,12 @@
       .grid__item { 
         position: relative;
         grid-row: span 3;
+        max-height: 705px;
+        overflow: hidden;
       }
+      
+      .footerImageToggle--show .grid__item { max-height: 689px; }
+      .fit--lastPage .grid__item { max-height: 615px; }
 
       .grid__item--image {
         grid-row: 1;
@@ -552,7 +561,14 @@
       .grid--imageSize-2.grid--col-2 .grid__item--image,
       .grid.grid--col-1 .grid__item--image { grid-column: 1 / -1 !important; }
 
-      .grid--imageSize-2.grid--col-2 .grid__item:not(.grid__item--image) { grid-row: span 2; }
+      .grid--imageSize-2.grid--col-2 .grid__item:not(.grid__item--image) { 
+        grid-row: span 2; 
+        max-height: 445px;
+      }
+      
+      .fit--lastPage .grid--imageSize-2.grid--col-2 .grid__item:not(.grid__item--image) { 
+        max-height: 374px;
+      }      
 
       .grid--imageSize-1.grid--imagePos-topRight .grid__item--image {
         grid-column: span 1 / -1;
@@ -573,7 +589,16 @@
       .grid--imagePos-bottomRight.grid--col-1 .grid__item:nth-child(2),
       .grid--imagePos-bottomRight.grid--imageSize-2 .grid__item:nth-child(3) {
         grid-row: span 2; 
+        max-height: 445px;
       }
+      
+      /* Covers top right and bottom right + col 2 + col 1 - MAX-HEIGHT exceptions for the last page */
+      .fit--lastPage .grid--imagePos-topRight.grid--col-1 .grid__item:nth-child(2),
+      .fit--lastPage .grid--imagePos-topRight.grid--imageSize-2 .grid__item:nth-child(3),
+      .fit--lastPage .grid--imagePos-bottomRight.grid--col-1 .grid__item:nth-child(2),
+      .fit--lastPage .grid--imagePos-bottomRight.grid--imageSize-2 .grid__item:nth-child(3) {
+        max-height: 374px;
+      }      
 
       /* Covers top left and bottom left + col 2 + col 1 */
       .grid--imagePos-topLeft .grid__item:nth-child(2),
@@ -581,10 +606,28 @@
       .grid--imagePos-bottomLeft .grid__item:nth-child(2),
       .grid--imagePos-bottomLeft.grid--imageSize-2 .grid__item:nth-child(3) {
         grid-row: span 2; 
+        max-height: 445px;
       }
+      
+      /* Covers top left and bottom left + col 2 + col 1 - MAX-HEIGHT exceptions for the last page */
+      .fit--lastPage .grid--imagePos-topLeft .grid__item:nth-child(2),
+      .fit--lastPage .grid--imagePos-topLeft.grid--imageSize-2 .grid__item:nth-child(3),
+      .fit--lastPage .grid--imagePos-bottomLeft .grid__item:nth-child(2),
+      .fit--lastPage .grid--imagePos-bottomLeft.grid--imageSize-2 .grid__item:nth-child(3) {
+        max-height: 374px;
+      }      
 
       .grid--imagePos-topRight.grid--col-2 .grid__item:nth-child(3),
-      .grid--imagePos-bottomRight.grid--col-2 .grid__item:nth-child(3) { grid-row: span 2; }
+      .grid--imagePos-bottomRight.grid--col-2 .grid__item:nth-child(3) { 
+        grid-row: span 2; 
+        max-height: 445px;
+      }
+      
+      /* MAX-HEIGHT exceptions for the last page */
+      .fit--lastPage .grid--imagePos-topRight.grid--col-2 .grid__item:nth-child(3),
+      .fit--lastPage .grid--imagePos-bottomRight.grid--col-2 .grid__item:nth-child(3) { 
+        max-height: 374px;
+      }      
 
       .grid--imageSize-1.grid--imagePos-bottomRight .grid__item--image {
         grid-column: span 1 / -1;
@@ -822,6 +865,7 @@
         <div class="container fit fit--internalPage">
           <div class="body body--internalPage">
             <div class="grid 
+                        footerImageToggle--{{{UWA_footer-image-toggle-a4bop}}}
                         {{^UWA_internal-pages-feature-image--a4bop}}grid--noHero{{/UWA_internal-pages-feature-image--a4bop}}
                         grid--imageSize-{{^UWA_feature-image-size--a4bop}}1{{/UWA_feature-image-size--a4bop}}{{UWA_feature-image-size--a4bop}}
                         grid--imagePos-{{^UWA_feature-image-position--a4bop}}topLeft{{/UWA_feature-image-position--a4bop}}{{UWA_feature-image-position--a4bop}}
@@ -836,8 +880,7 @@
               </div><!-- grid__item--image -->
               {{#collection.column}}
               {{#block.column-block}}
-              <div class="grid__item grid__item--text">
-                <div class="grid__itemInner" data-max-height="dynamic">
+              <div class="grid__item grid__item--text" data-max-height="css">
                   {{#collection.column-items}}
                   {{#block.text-block}}
                   <div class="copy u-heading-patch">{{{text--a4bop}}}</div><!-- copy -->
@@ -848,7 +891,6 @@
                   </div><!-- image -->
                   {{/block.image}}
                   {{/collection.column-items}}
-                </div><!-- grid__itemInner -->
               </div><!-- grid__item -->
               {{/block.column-block}}
               {{/collection.column}}
@@ -989,6 +1031,7 @@
         if(!footer || !containers || !internalFooter) return;
 
         internalFooter.classList.add('u-hide');
+        lastContainer.classList.add('fit--lastPage');
         lastContainer.appendChild(footer);          
       }
 
